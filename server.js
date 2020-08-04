@@ -4,33 +4,75 @@
  */
 
 var express = require('express');
-var app = express();
+var siofu = require("socketio-file-upload");
+var app = express().use(siofu.router);
 var http = require('http').Server(app);
 var path = require('path');
-const { Console } = require('console');
+const {
+    Console
+} = require('console');
 var io = require('socket.io')(http);
+
+const sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('Users.db');
+
+var users = 0;
+
+db.run("CREATE TABLE if not exists Users (_id INTEGER PRIMARY KEY, users TEXT)");
+
+db.serialize(function () {
+
+    // var stmt = db.prepare("INSERT INTO Users (users) VALUES (?)");
+
+    // stmt.run(users);
+    // stmt.finalize();
+
+    db.each("SELECT * FROM Users", function (err, row) {
+        console.log("Users : " + row._id, row.users);
+    });
+
+});
 
 var userList = []; // user list socket array
 var waitingList = []; // waiting list socket array
 var total_users = 0;
+var id_for_db = 1;
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.sendFile(__dirname + '/home.html');
 });
 
-app.get('/chat', function(req, res){
+app.get('/chat', function (req, res) {
     res.sendFile(__dirname + '/index.html');
+});
+
+app.get('/about', function (req, res) {
+    res.sendFile(__dirname + '/about.html');
+});
+
+app.get('/privacy', function (req, res) {
+    res.sendFile(__dirname + '/privacy.html');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Open http://localhost:3000
-http.listen(3000, function(){
+http.listen(3000, function () {
     console.log('listening on localhost:3000');
 });
 
-io.on('connection', function(socket){
+db.serialize(function () {
+    db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
+        io.sockets.emit('users', {
+            users: total_users
+        });
+    });
+});
+
+
+io.on('connection', function (socket) {
     // Check whether exists
+
     if (userList.indexOf(socket) != -1) {
         console.log('User already exists!');
         return;
@@ -39,18 +81,53 @@ io.on('connection', function(socket){
         debugMessageShowingWaitingList();
     }
 
+    socket.on('base64 file', function (msg) {
+        console.log('received base64 file from' + msg.username);
+        // socket.username = msg.username;
+        // socket.broadcast.emit('base64 image', //exclude sender
+        io.sockets.emit('base64 file',  //include sender
+    
+            {
+            //   username: socket.username,
+              file: msg.file,
+              fileName: msg.fileName
+            }
+    
+        );
+    });
+
+    // var uploader = new siofu();
+    // uploader.dir = "/uploads";
+    // uploader.listen(socket);
+
     // A user is disconnected
-    socket.on('disconnect', function(){
+    socket.on('disconnect', function () {
         console.log('a user disconnected' + socket.id);
-        if (total_users <= 0){
+        if (total_users <= 0) {
             total_users = 0
         } else {
             total_users -= 1;
         }
         console.log("Total number of users are: ", total_users);
-        socket.emit('users', {
-            users: total_users
+
+        let data = [total_users, id_for_db];
+        let sql = `UPDATE Users
+                SET users = ?
+                WHERE _id = ?
+                `
+        db.run(sql, data, function (err) {
+            if (err) {
+                return console.error(err.message);
+            }
+
+            db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
+                io.sockets.emit('users', {
+                    users: total_users
+                });
+            });
         });
+
+
         if (!socket.id) return;
         // Remove from the user list
         if (userList.indexOf(socket) != -1) {
@@ -62,7 +139,7 @@ io.on('connection', function(socket){
                 debugMessageShowingWaitingList();
             } else {
                 // Otherwise, the client was chatting, put his partner to the waiting list
-                console.log('His chatting partner is '+socket.partner.id);
+                console.log('His chatting partner is ' + socket.partner.id);
                 waitingList.push(socket.partner);
                 var chatPair = setUserPairs(socket.partner);
                 if (chatPair.length != 0) {
@@ -84,7 +161,7 @@ io.on('connection', function(socket){
     });
 
     // New user enters the username
-    socket.on('new user', function(data){
+    socket.on('new user', function (data) {
         console.log('User name: ' + data);
         socket.name = data;
         console.log('a user connected ' + socket.id);
@@ -92,10 +169,24 @@ io.on('connection', function(socket){
         waitingList.push(socket);
         total_users += 1;
         console.log("Total number of users are: ", total_users);
-        socket.emit('users', {
-            users: total_users
+
+        let data1 = [total_users, id_for_db];
+        let sql1 = `UPDATE Users
+                SET users = ?
+                WHERE _id = ?
+                `
+        db.run(sql1, data1, function (err) {
+            if (err) {
+                return console.error(err.message);
+            }
+
+            db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
+                io.sockets.emit('users', {
+                    users: total_users
+                });
+            });
         });
-        
+
         var chatPair = setUserPairs(socket);
         if (chatPair.length != 0) {
             // There is a chatting pair
@@ -114,7 +205,7 @@ io.on('connection', function(socket){
     });
 
     // Dealing with sending messages
-    socket.on('send message', function(data){
+    socket.on('send message', function (data) {
         var pair = data.pair;
         data.nickname = socket.name;
         data.id = socket.id;
@@ -126,23 +217,37 @@ io.on('connection', function(socket){
     });
 
     // Dealing with typing status
-    socket.on('typing status', function(data){
+    socket.on('typing status', function (data) {
         // Tell his partner that he is typing
         if (socket.partner) {
             io.to(socket.partner.id).emit('new typing status', data);
         }
     });
 
+    // socket.on('user image', function (msg) {
+    //     console.log(msg);
+    //     socket.broadcast.emit('user image', socket.nickname, msg);
+    // });
+
     function setUserPairs(s) {
-        var index = 0, firstUser = {}, secondUser = {}, chatPair = [];
+        var index = 0,
+            firstUser = {},
+            secondUser = {},
+            chatPair = [];
         while (index < waitingList.length) {
             if (waitingList[index] != s) {
                 var elem = waitingList.splice(index, 1)[0];
                 waitingList.splice(waitingList.indexOf(s), 1);
                 s.partner = elem;
                 elem.partner = s;
-                firstUser = {id: elem.id, name: elem.name};
-                secondUser = {id: s.id, name: s.name};
+                firstUser = {
+                    id: elem.id,
+                    name: elem.name
+                };
+                secondUser = {
+                    id: s.id,
+                    name: s.name
+                };
                 chatPair = [firstUser, secondUser];
                 break;
             }

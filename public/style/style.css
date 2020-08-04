@@ -14,7 +14,41 @@ GENERAL STYLE
 body {
     font-family: Helvetica;
     background-color: #E8B44D;
+    overflow-x: hidden;
 }
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    margin: -8px;
+    padding: -100px;
+
+  }
+  
+  .topnav a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 20px 16px;
+    text-decoration: none;
+    font-size: 20px;
+    padding-top: 30px;
+    text-align: center;
+  }
+  
+  .topnav a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  
+  .topnav a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  .topnav-right {
+    float: right;
+  }
 
 form input {
     font-size: 1em;
@@ -170,6 +204,14 @@ WAITING BOX STYLE
 /*********************************
 CHATTING BOX STYLE
 *********************************/
+
+#chat_box{
+    border: 5px solid green;
+    width: 40%; 
+    height: 662px;
+    margin-top: 1px;
+}
+
 #chat_container #partner_status {
     position: fixed;
     display: block;
@@ -189,7 +231,7 @@ CHATTING BOX STYLE
     border: none;
     position: fixed;
     bottom: 0;
-    width: 100%;
+    width: 40%;
     height: 60px;
     z-index: 2;
 }
@@ -203,14 +245,21 @@ CHATTING BOX STYLE
     height: 36px;
 }
 
+#chat_container form #image_btn {
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    /* margin: 0px 0; */
+}
+
 #chat_container form button {
-    width: 100px;
+    width: 85px;
     height: 40px;
     margin: 10px 0;
 }
 
 #chat_container form #end {
-    width: 100px;
+    width: 30px;
     height: 40px;
     margin: 10px 0;
 }
@@ -219,8 +268,9 @@ CHATTING BOX STYLE
 #chat_container #messages {
     width: 100%;
     list-style: none;
-    overflow: scroll;
+    /* overflow: scroll; */
     margin: 0 0 60px 0;
+    word-wrap: break-word;
 }
 
 #chat_container #messages li {
@@ -277,3 +327,52 @@ CHATTING BOX STYLE
     clear: both;
     background-color: #D34129;
 }
+
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+    margin-left: 610px;
+  }
+
+#footer {
+    /* background-color: #efefef; */
+    flex: 0 0 50px;/*or just height:50px;*/
+    margin-top: auto;
+    background-color: black;
+    width: 100%;
+    margin-left: -7px;
+    margin-bottom: 0px;
+    margin-top: 10px;
+    padding: 7px;
+
+  }
+
+  #footer .footer-links a{
+      color: white;
+      text-decoration: none;
+      padding: 20px;
+  }
+
+  #footer .footer-links a .company{
+    float: right;
+}
+
+@media screen and (max-width: 600px) {
+   #chat_container{
+       width: 100%;
+   }
+
+   #chat_container form{
+       width: 100%;
+   }
+
+   #chat_box{
+       width: 100%; 
+   }
+  }
+
+  .other_buttons{
+      margin-left: 100px;
+      margin-bottom: 200px;
+      border: 5px solid blue;
+  }

@@ -3,7 +3,10 @@ RESPONSIVE STYLE
 *********************************/
 @media (max-width: 500px) {
     #chat_container form button {
-        width: 100px;
+        width: 50px;
+    }
+    #chat_container form #end {
+        width: 50px;
     }
 
     #chat_container form input {

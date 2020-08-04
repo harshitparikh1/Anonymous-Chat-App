@@ -6,46 +6,123 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
+    <link rel="stylesheet" type="text/css" href="style/home.css">
     <title>Chat Application</title>
 
 </head>
 
 <body>
 
+    <div class="topnav">
+        <span style="float: left;">
+            <img src="img/logo.jfif" alt="Logo" height="70px">
+        </span>
+
+        <a href="/">chat123</a>
+
+        <div class="topnav-right">
+            <a class="active" href="/">Home</a>
+            <a href="/about">About us</a>
+            <a href="/">Chat with someone</a>
+            <span
+                style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
+                Connected users: <span id="users"> </span>
+            </span>
+
+        </div>
+    </div>
+
     <div>
 
-        <form action="?" method="POST">
+        <!-- <form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
             <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-            <br/>
-            <!-- <input type="submit" value="Submit"> -->
-          </form>
-        Welcome to our website where you can chat anonymously with strangers.
+            <br />
+            <input type="submit" value="Submit">
+        </form> -->
+
+        <h1>
+            Welcome to our website where you can chat anonymously with strangers.
+        </h1>
 
         <div>
-            <button>
+            <h2>
+                Talk to Someone Online
+            </h2>
+            <P>
+                We are working hard to keep <b> Chat Rooms Clean </b>, keeping the bots out and real people in.
+                We succeeded more with our authenticated users
+            </P>
+            <h3>
+                Find Someone Online to talk
+            </h3>
+            <p>
+                Chat123&copy; is an online community with the ambition to group people who are trying to find new friends. We
+                aim to provide the most exciting public chat rooms and the most interesting private face to face chat
+                rooms.
+
+            </p>
+        </div>
+
+
+        <form method="post" onsubmit="return submitUserForm();">
+            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                data-callback="verifyCaptcha"></div>
+            <div id="g-recaptcha-error"></div>
+            <!-- <input type="submit" name="submit" value="Submit" /> -->
+        </form>
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <script>
+            function submitUserForm() {
+                var response = grecaptcha.getResponse();
+                if (response.length == 0) {
+                    document.getElementById('g-recaptcha-error').innerHTML =
+                        '<span style="color:red;">This field is required.</span>';
+                    return false;
+                }
+                return true;
+            }
+
+            function verifyCaptcha() {
+                document.getElementById('g-recaptcha-error').innerHTML = '';
+                // window.location.href = '/chat';
+                document.getElementById('chat_btn').style.display = 'block';
+            }
+        </script>
+
+        <div style="padding-top: 30px;">
+            <button style="display: none;" id="chat_btn" onclick="window.location.href = '/chat'">
                 <a href="/chat" style="text-decoration: none; color: black; ">
                     Chat with your friends.
                 </a>
             </button>
         </div>
 
-        <div>
-            Total Connected users are : <span id="users"></span>
-        </div>
+       
+<div id="footer" style="bottom: 0; left: 0; margin-top: 245px;">
+
+    <p class="footer-links">
+        <a href="/" id="company">Chat123 &copy;</a>
+        ·
+        <a href="/privacy" id = "privacy">Privacy Policy</a>
+    </p>
+
+
+</div>
 
     </div>
 
     <script>
         var socket = io();
 
-        var total_users;
+        var total_users = 0;
+
+        document.getElementById("users").innerHTML = total_users;
 
         socket.on('users', function (users) {
             total_users = users.users;
             console.log("Total number of users are ", total_users);
+            document.getElementById("users").innerHTML = total_users;
         });
-
-        
     </script>
 
 </body>

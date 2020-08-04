@@ -1,18 +1,41 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Anonymous Chat App</title>
-    <meta charset = "UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style/style.css">
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/client.js"></script>
-    <script type="text/javascript" src="js/script.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <script type="text/javascript" src="js/script.js"></script> -->
 </head>
+
 <body>
-    <div id = "username_container">
-        <div id = "background">
+
+    <div class="topnav">
+        <span style="float: left;">
+            <img src="img/logo.jfif" alt="Logo" height="70px">
+        </span>
+
+        <a href="/">chat123</a>
+
+        <div class="topnav-right" style="margin-right: 25px;">
+            <a href="/">Home</a>
+            <a href="/about">About us</a>
+            <a class="active" href="/">Chat with someone</a>
+            <span
+                style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
+                Connected users: <span id="users"> </span>
+            </span>
+
+        </div>
+    </div>
+
+    <div id="username_container" style="width: 40%;">
+        <div id="background">
             <div>
                 <!-- <img id = "left_giraffe" src="img/giraffe_1.png"> -->
             </div>
@@ -23,8 +46,8 @@
                 <!-- <img id = "heart" src="img/heart.png"> -->
             </div>
         </div>
-        <div id = "main_container">
-            <div id = "title">
+        <div id="main_container">
+            <div id="title">
                 <div>
                     <!-- <img id = "title_img" src="img/title.png"> -->
                 </div>
@@ -32,34 +55,71 @@
                     <!-- <img id = "subtitle_img" src="img/subtitle.png"> -->
                 </div>
             </div>
-            <div id = "username_box">
+            <div id="username_box">
                 <form action="">
                     <div>
-                        <input id = "nickname" autocomplete="off" name="Stranger" placeholder="Stranger" />
+                        <input id="nickname" autocomplete="off" value="Stranger" placeholder="Stranger" />
                     </div>
                     <div>
-                        <button>You can have a small talk here.</button>
+                        <button id="join_chat">You can have a small talk here.</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-    <div id = "waiting_container">
-        <div id = "waiting_image">
+    <div id="waiting_container" style="width: 40%">
+        <div id="waiting_image">
             <!-- <img src="img/waiting.png"> -->
         </div>
-        <div id = "waiting_title">
-            <p>No one has joined the small chat, please wait patiently...</p>
+        <div id="waiting_title">
+            <p>Connecting to a stranger. Please wait.</p>
         </div>
     </div>
-    <div id = "chat_container">
-        <p id = "partner_status"></p>
-        <ul id="messages"></ul>
-        <form action="">
-            <input id="chat_message" autocomplete="off" />
-            <button>Send</button>
-            <button id="end"> <a href="/" style="text-decoration: none; color: white;"> End Chat </a></button>
-        </form>
+
+    <div id="chat_box">
+        <div id="chat_container">
+            <!-- <p id="partner_status"></p> -->
+            <ul id="messages"></ul>
+            <div class="alert alert-info" id="alert_template"
+                style="display: none; margin: auto; width: 30%; font-size: xx-large; height: 30px; padding-top: 350px; color: blue;">
+                <button type="button" class="close"> </button>
+            </div>
+            <form action="">
+                <input id="chat_message" autocomplete="off" />
+                <!-- <i class="fa fa-picture-o" aria-hidden="true"></i> -->
+                <input type="file" id="image_btn" accept="image/*" style="display: none;">
+                <label for="image_btn" class="fa fa-picture-o"> </label>
+                <!-- </i> -->
+                <button>Send</button>
+                <button id="end" style="font-size: larger;">+</button>
+            </form>
+        </div>
     </div>
+
+    <div class="other_buttons" style="display: none;">
+        <span id="send_photo">
+            <button onclick="send_photo()">
+                Send Photo
+            </button>
+        </span>
+        <span id="send_photo">
+            <button onclick="request_photo()">
+                Request Photo
+            </button>
+        </span>
+        <span id="send_photo">
+            <button>
+                <a href="/" style="text-decoration: none; color: black;"> End Chat </a>
+            </button>
+        </span>       
+    </div>
+
+    <!-- <div class="vl"></div> -->
+
+    <script>
+        
+    </script>
+
 </body>
+
 </html>
