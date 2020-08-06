@@ -15,6 +15,7 @@ var io = require('socket.io')(http);
 
 const sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('Users.db');
+var req;
 
 var users = 0;
 
@@ -81,20 +82,20 @@ io.on('connection', function (socket) {
         debugMessageShowingWaitingList();
     }
 
-    socket.on('base64 file', function (msg) {
-        console.log('received base64 file from' + msg.username);
-        // socket.username = msg.username;
-        // socket.broadcast.emit('base64 image', //exclude sender
-        io.sockets.emit('base64 file',  //include sender
+    // socket.on('base64 file', function (msg) {
+    //     console.log('received base64 file from' + msg.username);
+    //     // socket.username = msg.username;
+    //     // socket.broadcast.emit('base64 image', //exclude sender
+    //     io.sockets.emit('base64 file',  //include sender
     
-            {
-            //   username: socket.username,
-              file: msg.file,
-              fileName: msg.fileName
-            }
+    //         {
+    //         //   username: socket.username,
+    //           file: msg.file,
+    //           fileName: msg.fileName
+    //         }
     
-        );
-    });
+    //     );
+    // });
 
     // var uploader = new siofu();
     // uploader.dir = "/uploads";
@@ -216,6 +217,18 @@ io.on('connection', function (socket) {
         }
     });
 
+    // Requesting Photo
+    socket.on('requestphoto', function (data) {
+        var pair = data.pair;
+        var req = data.req;
+        data.id = socket.id;
+        console.log('Stranger wants to request your photo');
+        for (var i = 0; i < 2; i++) {
+            var user = pair[i].id;
+            io.to(user).emit('new request photo', data);
+        }
+    });
+
     // Dealing with typing status
     socket.on('typing status', function (data) {
         // Tell his partner that he is typing
@@ -223,6 +236,11 @@ io.on('connection', function (socket) {
             io.to(socket.partner.id).emit('new typing status', data);
         }
     });
+
+    socket.on('user image', function (msg) {
+        console.log(msg);
+        socket.broadcast.emit('user image', socket.nickname, msg);
+      });
 
     // socket.on('user image', function (msg) {
     //     console.log(msg);

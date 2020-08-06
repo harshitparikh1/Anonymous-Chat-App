@@ -175,6 +175,20 @@
 </div>
 
 
+<script>
+    var socket = io();
+
+    var total_users = 0;
+
+    document.getElementById("users").innerHTML = total_users;
+
+    socket.on('users', function (users) {
+        total_users = users.users;
+        console.log("Total number of users are ", total_users);
+        document.getElementById("users").innerHTML = total_users;
+    });
+</script>
+
 </body>
 
 </html>

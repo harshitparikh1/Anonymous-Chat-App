@@ -328,12 +328,6 @@ CHATTING BOX STYLE
     background-color: #D34129;
 }
 
-.vl {
-    border-left: 6px solid green;
-    height: 500px;
-    margin-left: 610px;
-  }
-
 #footer {
     /* background-color: #efefef; */
     flex: 0 0 50px;/*or just height:50px;*/
@@ -373,6 +367,18 @@ CHATTING BOX STYLE
 
   .other_buttons{
       margin-left: 100px;
-      margin-bottom: 200px;
-      border: 5px solid blue;
+      margin-bottom: 400px;
+      /* border: 5px solid blue; */
+      width: 150px;
+      height: 40px;
+      margin: 10px 0;
+  }
+
+  .other_buttons #send_photo button{
+      margin-bottom: 100px;
+      margin-left: 700px ;
+  }
+
+  .other_buttons #send_photo #request_photo_button_id{
+      margin-left: 500px;
   }
