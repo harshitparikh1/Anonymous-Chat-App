@@ -220,9 +220,17 @@ io.on('connection', function (socket) {
         }
     });
 
-    socket.on('user image', function (msg) {
+    socket.on('user image', function (data) {
         // console.log(msg);
-        socket.broadcast.emit('user image', socket.nickname, msg);
+        var pair = data.pair;
+        data.nickname = socket.name;
+        data.id = socket.id;
+        console.log('///message sent by ' + data.nickname + ' : ' + data.msg);
+        for (var i = 0; i < 2; i++) {
+            var user = pair[i].id;
+            io.to(user).emit('user image', socket.nickname, data);
+        }
+        // socket.broadcast.emit('user image', socket.nickname, data);
     });
 
     // socket.on('user image', function (msg) {

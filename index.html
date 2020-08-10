@@ -82,7 +82,7 @@
     <div id="chat_box" style="display: none;">
         <div id="chat_container">
             <!-- <p id="partner_status"></p> -->
-            <ul id="messages"></ul>
+            <ul id="messages" style="z-index: 0;"></ul>
             <!-- <div class="alert alert-info" id="alert_template"
                 style="display: none; margin: auto; width: 30%; font-size: xx-large; height: 30px; padding-top: 350px; color: blue;">
                 <button type="button" class="close"> </button>
@@ -93,23 +93,24 @@
                 <button type="button" id="plus" class="collapsible" style="font-size: larger; margin-bottom: 0px;"
                     onclick="myplusfunction()">+</button>
             </form>
-            <div style="margin-top: 500px; margin-left:500px;">
-
+            <div>
                 <div class="other_buttons" id="other_buttons">
-                    <span id="send_photo" style="display: none;">
-                        <button style="margin-right: 1000px;">
+                    <span id="send_photo"
+                        style="display: none; margin-left: -200px; display: inline-block; z-index: 1; margin-top: 450px;">
+                        <button style="margin-right: 300px;">
                             <input type="file" id="image_btn" accept="image/*" style="display: none;">
                             <label for="image_btn"> Send Photo </label>
                         </button>
                     </span>
-                    <span id="request_photo">
+                    <span id="request_photo"
+                        style="margin:0px; margin-left: 500px; display: inline-block; margin-top: 450px; margin-bottom: 10px;">
                         <button class="request_photo_button" style="margin-right: 30px;" id="request_photo_button_id">
                             Request Photo
                         </button>
                     </span>
-                    <span id="end">
+                    <span id="end" style="margin:0px; display: inline-block; margin-left: 500px; ">
                         <button>
-                            <a href="/" style="text-decoration: none; color: black;"> End Chat </a>
+                            <a href="/" style="text-decoration: none; color: white;"> End Chat </a>
                         </button>
                     </span>
                 </div>
@@ -242,14 +243,21 @@
 
             $(function () {
                 $('#image_btn').bind('change', function (e) {
-                    var data = e.originalEvent.target.files[0];
-                    var reader = new FileReader();
-                    reader.onload = function (evt) {
-                        image('me', evt.target.result);
-                        socket.emit('user image', evt.target.result);
-                    };
-                    reader.readAsDataURL(data);
 
+                    if ($chatPair != null) {
+                        var dataArray = {
+                            msg: $chatMessage.val(),
+                            nickname: $nickname,
+                            pair: $chatPair
+                        };
+                        var data = e.originalEvent.target.files[0];
+                        var reader = new FileReader();
+                        reader.onload = function (evt) {
+                            image('me', evt.target.result);
+                            socket.emit('user image', evt.target.result);
+                        };
+                        reader.readAsDataURL(data);
+                    }
                 });
             });
 
@@ -334,14 +342,28 @@
                     // alert("Stranger is requesting for your photo.");
                     toastr.info("Stranger is requesting for your photo.");
                     document.getElementById("send_photo").style.display = "block";
+                    document.getElementById("request_photo").style.marginTop = "10px";
+                    document.getElementById("request_photo").style.marginBottom = "10px";
+
                 }
             });
 
             socket.on('user image', image);
 
             // var canvas = $('<canvas width = "500" height = "300"></canvas>');
-            
+
             function image(from, base64Image) {
+
+                // if (('/#' + socket.id) == data.id) {
+                //     // $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data
+                //     //     .msg + '</div></li>');
+                //     $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
+                // } else {
+                //     // $('#messages').append('<li><div class = "left_bubble"><b>' + "Stranger" + ': </b>' +
+                //     //     data.msg + '</div></li>');
+                //     $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
+                // }
+
                 $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
                 // $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data.msg + '</div></li>');
 

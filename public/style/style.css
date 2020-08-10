@@ -375,10 +375,52 @@ CHATTING BOX STYLE
   }
 
   .other_buttons #send_photo button{
-      margin-bottom: 100px;
+      margin-bottom: 0px;
       margin-left: 700px ;
   }
 
   .other_buttons #send_photo #request_photo_button_id{
       margin-left: 500px;
+  }
+
+  .other_buttons #send_photo button {
+    border-width: 0 0 6px 0;
+    background-color: #D34129;
+    border-bottom: solid;
+    border-bottom-color: #AF2C1E;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    color: white;
+    font-family: Helvetica;
+    font-size: 1em;
+    width: 100px;
+  }
+
+  .other_buttons #request_photo button {
+    border-width: 0 0 6px 0;
+    background-color: #D34129;
+    border-bottom: solid;
+    border-bottom-color: #AF2C1E;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    color: white;
+    font-family: Helvetica;
+    font-size: 1em;
+    width: 100px;
+  }
+
+  .other_buttons #end button {
+    border-width: 0 0 6px 0;
+    background-color: #D34129;
+    border-bottom: solid;
+    border-bottom-color: #AF2C1E;
+    border-radius: 20px;
+    -moz-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    color: white;
+    font-family: Helvetica;
+    font-size: 1em;
+    width: 100px;
   }
