@@ -62,18 +62,19 @@ http.listen(3000, function () {
     console.log('listening on localhost:3000');
 });
 
-db.serialize(function () {
-    db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
-        io.sockets.emit('users', {
-            users: total_users
+setInterval(() => {
+    db.serialize(function () {
+        db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
+            io.sockets.emit('users', {
+                users: total_users
+            });
         });
     });
-});
+}, 5000);
 
 
 io.on('connection', function (socket) {
     // Check whether exists
-
     if (userList.indexOf(socket) != -1) {
         console.log('User already exists!');
         return;
@@ -82,24 +83,26 @@ io.on('connection', function (socket) {
         debugMessageShowingWaitingList();
     }
 
-    // socket.on('base64 file', function (msg) {
-    //     console.log('received base64 file from' + msg.username);
-    //     // socket.username = msg.username;
-    //     // socket.broadcast.emit('base64 image', //exclude sender
-    //     io.sockets.emit('base64 file',  //include sender
-    
-    //         {
-    //         //   username: socket.username,
-    //           file: msg.file,
-    //           fileName: msg.fileName
-    //         }
-    
-    //     );
-    // });
+    total_users += 1;
+    console.log("Total number of users are: ", total_users);
 
-    // var uploader = new siofu();
-    // uploader.dir = "/uploads";
-    // uploader.listen(socket);
+    let data = [total_users, id_for_db];
+    let sql = `UPDATE Users
+            SET users = ?
+            WHERE _id = ?
+            `
+    db.run(sql, data, function (err) {
+        if (err) {
+            return console.error(err.message);
+        }
+
+        db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
+            io.sockets.emit('users', {
+                users: total_users
+            });
+        });
+    });
+
 
     // A user is disconnected
     socket.on('disconnect', function () {
@@ -168,26 +171,6 @@ io.on('connection', function (socket) {
         console.log('a user connected ' + socket.id);
         userList.push(socket);
         waitingList.push(socket);
-        total_users += 1;
-        console.log("Total number of users are: ", total_users);
-
-        let data1 = [total_users, id_for_db];
-        let sql1 = `UPDATE Users
-                SET users = ?
-                WHERE _id = ?
-                `
-        db.run(sql1, data1, function (err) {
-            if (err) {
-                return console.error(err.message);
-            }
-
-            db.each("SELECT * FROM Users WHERE _id = 1", function (err, row) {
-                io.sockets.emit('users', {
-                    users: total_users
-                });
-            });
-        });
-
         var chatPair = setUserPairs(socket);
         if (chatPair.length != 0) {
             // There is a chatting pair
@@ -238,9 +221,9 @@ io.on('connection', function (socket) {
     });
 
     socket.on('user image', function (msg) {
-        console.log(msg);
+        // console.log(msg);
         socket.broadcast.emit('user image', socket.nickname, msg);
-      });
+    });
 
     // socket.on('user image', function (msg) {
     //     console.log(msg);

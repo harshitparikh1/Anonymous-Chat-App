@@ -27,7 +27,7 @@
 
         <div class="topnav-right" style="margin-right: 25px;">
             <a href="/">Home</a>
-            <a href="/about">About us</a>
+            <a href="/about">About</a>
             <a class="active" href="/">Chat with someone</a>
             <span
                 style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
@@ -92,7 +92,6 @@
                 <button>Send</button>
                 <button type="button" id="plus" class="collapsible" style="font-size: larger; margin-bottom: 0px;"
                     onclick="myplusfunction()">+</button>
-
             </form>
             <div style="margin-top: 500px; margin-left:500px;">
 
@@ -136,6 +135,16 @@
          *
          * SOCKET IO ON THE CLIENT SIDE
          */
+
+        toastr.options = {
+            "debug": false,
+            "positionClass": "toast-bottom-center",
+            "onclick": null,
+            "fadeIn": 300,
+            "fadeOut": 1000,
+            "timeOut": 5000,
+            "extendedTimeOut": 1000
+        }
 
         $(document).ready(function () {
 
@@ -330,10 +339,40 @@
 
             socket.on('user image', image);
 
+            // var canvas = $('<canvas width = "500" height = "300"></canvas>');
+            
             function image(from, base64Image) {
                 $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
                 // $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data.msg + '</div></li>');
+
+
+                // const width = 500;
+                // const height = 300;
+                // reader.readAsDataURL(e.target.files[0]);
+                // reader.onload = function (evt) {
+                //     const img = new Image();
+                //     img.src = event.target.result;
+                //     img.onload = () => {
+                //         const elem = document.createElement('canvas');
+                //         elem.width = width;
+                //         elem.height = height;
+                //         const ctx = elem.getContext('2d');
+                //         // img.width and img.height will contain the original dimensions
+                //         ctx.drawImage(img, 0, 0, width, height);
+                //         ctx.canvas.toBlob((blob) => {
+                //             const file = new File([blob], fileName, {
+                //                 type: 'image/jpeg',
+                //                 lastModified: Date.now()
+                //             });
+                //         }, 'image/jpeg', 1);
+                //     }
+                //     reader.onerror = error => console.log(error);
+                // };
+
+                // $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image +
+                //     '"/>'));
             }
+
 
 
 
