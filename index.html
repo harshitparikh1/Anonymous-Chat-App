@@ -82,7 +82,7 @@
     <div id="chat_box" style="display: none;">
         <div id="chat_container">
             <!-- <p id="partner_status"></p> -->
-            <ul id="messages" style="z-index: 0;"></ul>
+            <ul id="messages"></ul>
             <!-- <div class="alert alert-info" id="alert_template"
                 style="display: none; margin: auto; width: 30%; font-size: xx-large; height: 30px; padding-top: 350px; color: blue;">
                 <button type="button" class="close"> </button>
@@ -96,7 +96,7 @@
             <div>
                 <div class="other_buttons" id="other_buttons">
                     <span id="send_photo"
-                        style="display: none; margin-left: -200px; display: inline-block; z-index: 1; margin-top: 450px;">
+                        style="display: none; margin-left: -200px; display: inline-block; margin-top: 450px;">
                         <button style="margin-right: 300px;">
                             <input type="file" id="image_btn" accept="image/*" style="display: none;">
                             <label for="image_btn"> Send Photo </label>
@@ -245,16 +245,16 @@
                 $('#image_btn').bind('change', function (e) {
 
                     if ($chatPair != null) {
-                        var dataArray = {
-                            msg: $chatMessage.val(),
-                            nickname: $nickname,
-                            pair: $chatPair
-                        };
                         var data = e.originalEvent.target.files[0];
                         var reader = new FileReader();
                         reader.onload = function (evt) {
                             image('me', evt.target.result);
-                            socket.emit('user image', evt.target.result);
+                            var dataArray = {
+                                img: evt.target.result,
+                                nickname: $nickname,
+                                pair: $chatPair
+                            };
+                            socket.emit('user image', dataArray);
                         };
                         reader.readAsDataURL(data);
                     }
@@ -350,99 +350,9 @@
 
             socket.on('user image', image);
 
-            // var canvas = $('<canvas width = "500" height = "300"></canvas>');
-
-            function image(from, base64Image) {
-
-                // if (('/#' + socket.id) == data.id) {
-                //     // $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data
-                //     //     .msg + '</div></li>');
-                //     $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
-                // } else {
-                //     // $('#messages').append('<li><div class = "left_bubble"><b>' + "Stranger" + ': </b>' +
-                //     //     data.msg + '</div></li>');
-                //     $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
-                // }
-
-                $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image + '"/>'));
-                // $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data.msg + '</div></li>');
-
-
-                // const width = 500;
-                // const height = 300;
-                // reader.readAsDataURL(e.target.files[0]);
-                // reader.onload = function (evt) {
-                //     const img = new Image();
-                //     img.src = event.target.result;
-                //     img.onload = () => {
-                //         const elem = document.createElement('canvas');
-                //         elem.width = width;
-                //         elem.height = height;
-                //         const ctx = elem.getContext('2d');
-                //         // img.width and img.height will contain the original dimensions
-                //         ctx.drawImage(img, 0, 0, width, height);
-                //         ctx.canvas.toBlob((blob) => {
-                //             const file = new File([blob], fileName, {
-                //                 type: 'image/jpeg',
-                //                 lastModified: Date.now()
-                //             });
-                //         }, 'image/jpeg', 1);
-                //     }
-                //     reader.onerror = error => console.log(error);
-                // };
-
-                // $('#messages').append($('<p>').append($('<b>').text(from), '<img src="' + base64Image +
-                //     '"/>'));
+            function image(base64Image) {
+                $('#messages').append($('<p>').append($('<b>'), '<img height = "500" width = "500" src="' + base64Image + '"/>'));
             }
-
-
-
-
-            // socket.on('user image', function (data){
-
-            //     if (('/#' + socket.id) == data.id) {
-            //         $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + data.base64Image + '</div></li>');
-            //     } else {
-            //         $('#messages').append('<li><div class = "left_bubble"><b>' + "Stranger" + ': </b>' + data.base64Image + '</div></li>');
-            //     }
-
-            //     var chatListHeight = $messageContainer.height();
-            //     var formHeight = $chatForm.height();
-            //     var statusHeight = $partnerStatus.height();
-            //     var winHeight = $(window).height();
-            //     var margin = 10 * 2;
-
-            //     // Scroll to see the last message
-            //     if (chatListHeight + formHeight + statusHeight + margin > winHeight) {
-            //         var scrollVal = chatListHeight + formHeight + statusHeight + margin - winHeight;
-            //         $('html, body').animate({
-            //             scrollTop: scrollVal
-            //         }, 1000);
-            //     }
-            // });
-
-            // function image (base64Image) {
-            //     if (('/#' + socket.id) == data.id) {
-            //         $('#messages').append('<li><div class = "right_bubble"><b>' + "Me" + ': </b>' + base64Image + '</div></li>');
-            //     } else {
-            //         $('#messages').append('<li><div class = "left_bubble"><b>' + "Stranger" + ': </b>' + base64Image + '</div></li>');
-            //     }
-            //     var chatListHeight = $messageContainer.height();
-            //     var formHeight = $chatForm.height();
-            //     var statusHeight = $partnerStatus.height();
-            //     var winHeight = $(window).height();
-            //     var margin = 10 * 2;
-
-            //     // Scroll to see the last message
-            //     if (chatListHeight + formHeight + statusHeight + margin > winHeight) {
-            //         var scrollVal = chatListHeight + formHeight + statusHeight + margin - winHeight;
-            //         $('html, body').animate({
-            //             scrollTop: scrollVal
-            //         }, 1000);
-            //     }
-
-            // }
-
 
             socket.on('chat pair', function (data) {
                 if (data) {
