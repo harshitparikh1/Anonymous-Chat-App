@@ -211,7 +211,7 @@ CHATTING BOX STYLE
 #chat_box{
     border: 5px solid green;
     width: 40%; 
-    height: 662px;
+    height: 605px;
     margin-top: 1px;
 }
 
@@ -236,7 +236,7 @@ CHATTING BOX STYLE
     bottom: 0;
     width: 40%;
     height: 60px;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
 #chat_container form input {
@@ -367,6 +367,7 @@ CHATTING BOX STYLE
 
    #chat_box{
        width: 100%; 
+       height: 350px;
    }
   }
 
@@ -377,15 +378,6 @@ CHATTING BOX STYLE
       width: 150px;
       height: 40px;
       margin: 10px 0;
-  }
-
-  .other_buttons #send_photo button{
-      margin-bottom: 0px;
-      margin-left: 700px ;
-  }
-
-  .other_buttons #send_photo #request_photo_button_id{
-      margin-left: 500px;
   }
 
   .other_buttons #send_photo button {

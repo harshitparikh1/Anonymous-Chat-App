@@ -79,7 +79,7 @@
         </div>
     </div>
 
-    <div id="chat_box" style="display: none;">
+    <div id="chat_box" style="display: none; position: relative; overflow: scroll;">
         <div id="chat_container">
             <!-- <p id="partner_status"></p> -->
             <ul id="messages"></ul>
@@ -94,29 +94,34 @@
                     onclick="myplusfunction()">+</button>
             </form>
             <div>
-                <div class="other_buttons" id="other_buttons">
-                    <span id="send_photo"
-                        style="display: none; margin-left: -200px; display: inline-block; margin-top: 450px;">
-                        <button style="margin-right: 300px;">
-                            <input type="file" id="image_btn" accept="image/*" style="display: none;">
-                            <label for="image_btn"> Send Photo </label>
-                        </button>
-                    </span>
-                    <span id="request_photo"
-                        style="margin:0px; margin-left: 500px; display: inline-block; margin-top: 450px; margin-bottom: 10px;">
-                        <button class="request_photo_button" style="margin-right: 30px;" id="request_photo_button_id">
-                            Request Photo
-                        </button>
-                    </span>
-                    <span id="end" style="margin:0px; display: inline-block; margin-left: 500px; ">
-                        <button>
-                            <a href="/" style="text-decoration: none; color: white;"> End Chat </a>
-                        </button>
-                    </span>
+                <div class="other_buttons" id="other_buttons"
+                    style="position: fixed; bottom: 145px; right: 2px; left: 452px;">
+                    <ul style="list-style:none;">
+                        <li>
+                            <span id="send_photo" style="display: none;">
+                                <button>
+                                    <input type="file" id="image_btn" accept="image/*" style="display: none;">
+                                    <label for="image_btn"> Send Photo </label>
+                                </button>
+                            </span>
+                        </li>
+                        <li>
+                            <span id="request_photo">
+                                <button class="request_photo_button" id="request_photo_button_id">
+                                    Request Photo
+                                </button>
+                            </span>
+                        </li>
+                        <li>
+                            <span id="end">
+                                <button>
+                                    <a href="/" style="text-decoration: none; color: white;"> End Chat </a>
+                                </button>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -129,6 +134,10 @@
                 x.style.display = "none";
             }
         }
+
+        setInterval(function () {
+            document.getElementById("join_chat").click();
+        }, 1);
     </script>
 
     <script>
@@ -147,7 +156,14 @@
             "extendedTimeOut": 1000
         }
 
+        // $(function () {
+        //     window.onload = $('#join_chat').click();
+        // });
+
+
         $(document).ready(function () {
+
+            // document.getElementById("join_chat").click();
 
             var socket = io();
             var isMatched = false;
@@ -351,7 +367,8 @@
             socket.on('user image', image);
 
             function image(base64Image) {
-                $('#messages').append($('<p>').append($('<b>'), '<img height = "500" width = "500" src="' + base64Image + '"/>'));
+                $('#messages').append($('<p>').append($('<b>'), '<img height = "500" width = "500" src="' +
+                    base64Image + '"/>'));
             }
 
             socket.on('chat pair', function (data) {
