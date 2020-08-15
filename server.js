@@ -8,6 +8,7 @@ var siofu = require("socketio-file-upload");
 var app = express().use(siofu.router);
 var http = require('http').Server(app);
 var path = require('path');
+var port = (process.env.PORT || process.env.VCAP_APP_PORT || 3000);
 const {
     Console
 } = require('console');
@@ -58,8 +59,8 @@ app.get('/privacy', function (req, res) {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Open http://localhost:3000
-http.listen(3000, function () {
-    console.log('listening on localhost:3000');
+http.listen(port, function () {
+    console.log('listening on localhost:', port);
 });
 
 setInterval(() => {
