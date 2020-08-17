@@ -15,10 +15,12 @@
 
     <div class="topnav">
         <span style="float: left;">
-            <img src="img/logo.jfif" alt="Logo" height="70px">
+            <a class="logo" href="/">
+                <img src="img/logo.jfif" alt="Logo" height="70px">
+            </a>
         </span>
 
-        <a href="/">chat123</a>
+        <!-- <a href="/">chat123</a> -->
 
         <div class="topnav-right">
             <a class="active" href="/">Home</a>
@@ -49,30 +51,23 @@
                 Talk to Someone Online
             </h2>
             <P>
+                Chat with someone in private chat rooms. Find new friends or date online – with real users from almost
+                195 countries waiting for you.
                 We are working hard to keep <b> Chat Rooms Clean </b>, keeping the bots out and real people in.
-                We succeeded more with our authenticated users
+                We succeeded more with our authenticated users.
             </P>
             <h3>
                 Find Someone Online to talk
             </h3>
             <p>
-                Chat123&copy; is an online community with the ambition to group people who are trying to find new friends. We
+                Chat123&copy; is an online community with the ambition to group people who are trying to find new
+                friends. We
                 aim to provide the most exciting public chat rooms and the most interesting private face to face chat
                 rooms.
 
             </p>
-            <h3 style="margin: auto; width: 50%; margin-bottom:15px; ">
-                Please verify that you are a human.
-            </h3>
         </div>
 
-
-        <form method="post" onsubmit="return submitUserForm();">
-            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                data-callback="verifyCaptcha"></div>
-            <div id="g-recaptcha-error"></div>
-            <!-- <input type="submit" name="submit" value="Submit" /> -->
-        </form>
         <script src='https://www.google.com/recaptcha/api.js'></script>
         <script>
             function submitUserForm() {
@@ -88,29 +83,44 @@
             function verifyCaptcha() {
                 document.getElementById('g-recaptcha-error').innerHTML = '';
                 // window.location.href = '/chat';
-                document.getElementById('chat_btn').style.display = 'block';
+                // document.getElementById('chat_btn').style.display = 'block';
+                window.location.href = '/chat';
+            }
+
+            function chat_btn() {
+                document.getElementById('human_verif_form').style.display = 'block';
             }
         </script>
 
         <div style="padding-top: 30px;">
-            <button style="display: none;" id="chat_btn" onclick="window.location.href = '/chat'">
-                <a href="/chat" style="text-decoration: none; color: black; ">
-                    Chat with your friends.
-                </a>
+            <button style="display: block; font-size: larger; color: white;" id="chat_btn" onclick="chat_btn()">
+                Chat with Someone
             </button>
         </div>
 
-       
-<div id="footer" style="bottom: 0; left: 0; margin-top: 245px;">
+        <div id="human_verif_form" style="display: none; margin-top: 30px;">
+            <h3 style="margin: auto; width: 50%; margin-bottom:15px; ">
+                Please verify that you are a human.
+            </h3>
+            <form method="post" onsubmit="return submitUserForm();">
+                <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+                    data-callback="verifyCaptcha"></div>
+                <div id="g-recaptcha-error"></div>
+                <!-- <input type="submit" name="submit" value="Submit" /> -->
+            </form>
+        </div>
 
-    <p class="footer-links">
-        <a href="/" id="company">Chat123 &copy;</a>
-        ·
-        <a href="/privacy" id = "privacy">Privacy Policy</a>
-    </p>
+
+        <div id="footer" style="bottom: 0; left: 0; margin-top: 245px;">
+
+            <p class="footer-links">
+                <a href="/" id="company">Chat123 &copy;</a>
+
+                <a href="/privacy" id="privacy">Privacy Policy</a>
+            </p>
 
 
-</div>
+        </div>
 
     </div>
 
@@ -122,7 +132,7 @@
         document.getElementById("users").innerHTML = total_users;
 
         socket.on('users', function (users) {
-            total_users = users.users;
+            total_users = users.users * 1000;
             console.log("Total number of users are ", total_users);
             document.getElementById("users").innerHTML = total_users;
         });

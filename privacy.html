@@ -183,7 +183,7 @@
     document.getElementById("users").innerHTML = total_users;
 
     socket.on('users', function (users) {
-        total_users = users.users;
+        total_users = users.users * 1000;
         console.log("Total number of users are ", total_users);
         document.getElementById("users").innerHTML = total_users;
     });

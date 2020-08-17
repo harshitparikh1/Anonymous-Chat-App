@@ -11,6 +11,7 @@
     <!-- <script type="text/javascript" src="js/client.js"></script> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!-- <script type="text/javascript" src="js/script.js"></script> -->
 </head>
 
@@ -20,15 +21,17 @@
 
     <div class="topnav">
         <span style="float: left;">
-            <img src="img/logo.jfif" alt="Logo" height="70px">
+            <a class="logo" href="/">
+                <img src="img/logo.jfif" alt="Logo" height="70px">
+            </a>
         </span>
 
-        <a href="/">chat123</a>
+        <!-- <a href="/">chat123</a> -->
 
-        <div class="topnav-right" style="margin-right: 25px;">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a class="active" href="/">Chat with someone</a>
+        <div class="topnav-right">
+            <a style="text-decoration: none;" href="/">Home</a>
+            <a href="/about" style="text-decoration: none;">About</a>
+            <a class="active" href="/" style="text-decoration: none;">Chat with someone</a>
             <span
                 style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
                 Connected users: <span id="users"> </span>
@@ -75,7 +78,10 @@
             <!-- <img src="img/waiting.png"> -->
         </div>
         <div id="waiting_title">
-            <p>Connecting to a stranger. Please wait.</p>
+            <!-- <p>Connecting to a stranger. Please wait.</p> -->
+            <div class="alert alert-success">
+                <strong>Connecting to a stranger. Please wait. </strong>
+              </div>
         </div>
     </div>
 
@@ -319,7 +325,7 @@
             });
 
             socket.on('users', function (users) {
-                total_users = users.users;
+                total_users = users.users * 1000;
                 console.log("Total number of users are ", total_users);
                 document.getElementById("users").innerHTML = total_users;
             });
@@ -391,7 +397,7 @@
                         isMatched = false;
                     } else if (data == 'matched') {
                         console.log('matched');
-                        alert("User Connected.");
+                        toastr.info("User Connected. Someone say Hi..");
                         // $("#connected").show();
                         // setTimeout(function() { $("#connected").hide(); }, 5000);
                         document.getElementById("chat_box").style.display = "block";
