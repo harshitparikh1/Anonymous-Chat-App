@@ -14,15 +14,17 @@
 
     <div class="topnav">
         <span style="float: left;">
-            <img src="img/logo.jfif" alt="Logo" height="70px">
+            <a class="logo" style="margin: 0px; padding: 0px;" href="/">
+                <img src="img/logo.jfif" alt="Logo" height="70px">
+            </a>
         </span>
 
-        <a href="/">xyz123</a>
+        <!-- <a href="/">chat123</a> -->
 
         <div class="topnav-right">
             <a href="/">Home</a>
-            <a class="active" href="/about">About</a>
-            <a href="/">Chat with someone</a>
+            <a href="/about">About</a>
+            <a href="/">Chat with Someone</a>
             <span
                 style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
                 Connected users: <span id="users"> </span>
@@ -158,7 +160,7 @@
             Contact Us
         </b>
     </p>
-    <p>
+    <p style="margin-bottom: 70px;">
         If you have any questions about this Privacy Policy, please <a href="">contact us</a> .
     </p>
 
@@ -166,8 +168,7 @@
 <div id="footer">
 
     <p class="footer-links">
-        <a href="/" id="company">Chat123 &copy;</a>
-        ·
+        <a href="/" id="company">Chat123&copy;</a>
         <a href="/privacy" id = "privacy">Privacy Policy</a>
     </p>
 
@@ -183,7 +184,7 @@
     document.getElementById("users").innerHTML = total_users;
 
     socket.on('users', function (users) {
-        total_users = users.users * 1000;
+        total_users = users.users;
         console.log("Total number of users are ", total_users);
         document.getElementById("users").innerHTML = total_users;
     });

@@ -8,33 +8,56 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" type="text/css" href="style/home.css">
     <title>Chat Application</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
 <body>
 
-    <div class="topnav">
+    <!-- <div class="topnav">
         <span style="float: left;">
             <a class="logo" style="margin: 0px; padding: 0px;" href="/">
                 <img src="img/logo.jfif" alt="Logo" height="70px">
             </a>
         </span>
 
-        <!-- <a href="/">chat123</a> -->
-
         <div class="topnav-right">
             <a class="active" href="/">Home</a>
             <a href="/about">About</a>
-            <a href="/">Chat with someone</a>
+            <a href="/">Chat with Someone</a>
             <span
                 style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
                 Connected users: <span id="users"> </span>
             </span>
-
         </div>
-    </div>
+    </div> -->
 
-    <div>
+    <nav class="navbar navbar-inverse" style="background-color: #4481bb;">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>                        
+            </button>
+            <a class="navbar-brand" href="/">
+                <img src="img/logo.jfif" alt="Logo" height="34px">
+            </a>
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a style="color: #ffffff; font-size: 20px;" href="/"> Home</a></li>
+              <li><a style="color: #ffffff; font-size: 20px;" href="/about"> About</a></li>
+              <li><a style="color: #ffffff; font-size: 20px;" href="/"> Chat with Someone</a></li>
+              <li><a style="color: #ffffff; font-size: 20px;" href="#"> Connected Users: <span id="users"></span></a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+    <div class="container">
 
         <!-- <form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
             <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
@@ -53,7 +76,7 @@
             <P>
                 Chat with someone in private chat rooms. Find new friends or date online – with real users from almost
                 195 countries waiting for you.
-                We are working hard to keep <b> Chat Rooms Clean </b>, keeping the bots out and real people in.
+                We are working hard to keep <b> Chat Rooms Clean, </b> keeping the bots out and real people in.
                 We succeeded more with our authenticated users.
             </P>
             <h3>
@@ -87,8 +110,15 @@
                 window.location.href = '/chat';
             }
 
+            var count = localStorage.getItem("count");
+            console.log("count = ", count - 1);
+
             function chat_btn() {
-                document.getElementById('human_verif_form').style.display = 'block';
+                if (parseInt(count) == 0) {
+                    window.location.href = '/chat';
+                } else {
+                    document.getElementById('human_verif_form').style.display = 'block';
+                }
             }
         </script>
 
@@ -98,7 +128,7 @@
             </button>
         </div>
 
-        <div id="human_verif_form" style="display: none; margin-top: 30px;">
+        <div id="human_verif_form" style="display: none; margin-top: 30px; ">
             <h3 style="margin: auto; width: 50%; margin-bottom:15px; ">
                 Please verify that you are a human.
             </h3>
@@ -111,10 +141,10 @@
         </div>
 
 
-        <div id="footer" style="bottom: 0; left: 0; margin-top: 245px;">
+        <div id="footer" style="bottom: 0; left: 0; margin-top: 245px; height: 45px; margin: auto; width: 100%; padding-top: 15px">
 
             <p class="footer-links">
-                <a href="/" id="company">Chat123 &copy;</a>
+                <a href="/" id="company">Chat123&copy;</a>
 
                 <a href="/privacy" id="privacy">Privacy Policy</a>
             </p>
@@ -132,7 +162,7 @@
         document.getElementById("users").innerHTML = total_users;
 
         socket.on('users', function (users) {
-            total_users = users.users * 1000;
+            total_users = users.users;
             console.log("Total number of users are ", total_users);
             document.getElementById("users").innerHTML = total_users;
         });

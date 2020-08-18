@@ -21,7 +21,7 @@
 
     <div class="topnav">
         <span style="float: left;">
-            <a class="logo" href="/">
+            <a class="logo" style="margin: 0px; padding: 0px;" href="/">
                 <img src="img/logo.jfif" alt="Logo" height="70px">
             </a>
         </span>
@@ -29,9 +29,9 @@
         <!-- <a href="/">chat123</a> -->
 
         <div class="topnav-right">
-            <a style="text-decoration: none;" href="/">Home</a>
-            <a href="/about" style="text-decoration: none;">About</a>
-            <a class="active" href="/" style="text-decoration: none;">Chat with someone</a>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a class="active" href="/">Chat with Someone</a>
             <span
                 style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
                 Connected users: <span id="users"> </span>
@@ -78,10 +78,12 @@
             <!-- <img src="img/waiting.png"> -->
         </div>
         <div id="waiting_title">
-            <!-- <p>Connecting to a stranger. Please wait.</p> -->
+            <!-- <div class="alert alert-success">
+                <strong>Connecting to the server. </strong>
+            </div> -->
             <div class="alert alert-success">
-                <strong>Connecting to a stranger. Please wait. </strong>
-              </div>
+                <strong>Waiting for the user to connect. </strong>
+            </div>
         </div>
     </div>
 
@@ -121,7 +123,8 @@
                         <li>
                             <span id="end">
                                 <button>
-                                    <a href="/" style="text-decoration: none; color: white;"> End Chat </a>
+                                    <a style="text-decoration: none; color: white;" onclick="end_chat()"> End
+                                        Chat </a>
                                 </button>
                             </span>
                         </li>
@@ -144,6 +147,18 @@
         setInterval(function () {
             document.getElementById("join_chat").click();
         }, 1);
+
+        function end_chat() {
+            let count = 0;
+            console.log("Count = ", count);
+            // Check browser support
+            if (typeof (Storage) !== "undefined") {
+                // Store
+                localStorage.setItem("count", count + 1);
+            }
+            window.location.href = "/";
+
+        }
     </script>
 
     <script>
@@ -166,6 +181,10 @@
         //     window.onload = $('#join_chat').click();
         // });
 
+        function updateScroll() {
+            var element = document.getElementById("chat_box");
+            element.scrollTop = element.scrollHeight;
+        }
 
         $(document).ready(function () {
 
@@ -222,24 +241,6 @@
                 return false;
             });
 
-            // $('#image_btn').bind('change', function (e) {
-            //     var data = e.originalEvent.target.files[0];
-            //     readThenSendFile(data);
-            // });
-
-            // function readThenSendFile(data) {
-
-            //     var reader = new FileReader();
-            //     reader.onload = function (evt) {
-            //         var msg = {};
-            //         // msg.username = username;
-            //         msg.file = evt.target.result;
-            //         msg.fileName = data.name;
-            //         io.sockets.emit('base64 file', msg);
-            //     };
-            //     reader.readAsDataURL(data);
-            // }
-
             // Submit the chatting messages
             $chatForm.submit(function () {
                 if ($chatMessage.val() != '') {
@@ -283,40 +284,6 @@
                 });
             });
 
-
-            // var coll = document.getElementsByClassName("collapsible");
-            // var i;
-
-            // for (i = 0; i < coll.length; i++) {
-            //     coll[i].addEventListener("click", function () {
-            //         this.classList.toggle("active");
-            //         var other_buttons = this.nextElementSibling;
-            // if (other_buttons.style.display === "block") {
-            //     other_buttons.style.display = "none";
-            // } else {
-            //     other_buttons.style.display = "block";
-            // }
-            // });
-            // }
-
-            // var uploader = new SocketIOFileUpload(socket);
-            // uploader.listenOnInput(document.getElementById("siofu_input"));
-
-            // socket.on('user image', image);
-
-            // $(function () {
-            //     $('#image_btn').bind('change', function (e) {
-            //         var data = e.originalEvent.target.files[0];
-            //         var reader = new FileReader();
-            //         reader.onload = function (evt) {
-            //             image('me', evt.target.result);
-            //             io.sockets.emit('user image', evt.target.result);
-            //         };
-            //         reader.readAsDataURL(data);
-
-            //     });
-            // });
-
             // Get the typing status from the partner
             socket.on('new typing status', function () {
                 if ($partnerName != null) {
@@ -325,7 +292,7 @@
             });
 
             socket.on('users', function (users) {
-                total_users = users.users * 1000;
+                total_users = users.users;
                 console.log("Total number of users are ", total_users);
                 document.getElementById("users").innerHTML = total_users;
             });
@@ -353,15 +320,15 @@
                         scrollTop: scrollVal
                     }, 1000);
                 }
+
+                updateScroll();
             });
 
             socket.on('new request photo', function (data) {
                 if (('/#' + socket.id) == data.id) {
-                    // alert("Sent request.");
                     toastr.info("Sent Request");
                     document.getElementById("request_photo_button_id").style.display = "none";
                 } else {
-                    // alert("Stranger is requesting for your photo.");
                     toastr.info("Stranger is requesting for your photo.");
                     document.getElementById("send_photo").style.display = "block";
                     document.getElementById("request_photo").style.marginTop = "10px";

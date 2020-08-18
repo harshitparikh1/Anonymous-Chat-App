@@ -220,8 +220,8 @@ CHATTING BOX STYLE
 #chat_box{
     /* border: 5px solid green; */
     width: 40%; 
-    height: 605px;
-    margin-top: 1px;
+    height: 600px;
+    margin-top: 10px;
 }
 
 #chat_container #partner_status {
