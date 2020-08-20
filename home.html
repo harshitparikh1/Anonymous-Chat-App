@@ -8,56 +8,47 @@
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" type="text/css" href="style/home.css">
     <title>Chat Application</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="style/home.css">
 
 </head>
 
 <body>
 
-    <!-- <div class="topnav">
-        <span style="float: left;">
-            <a class="logo" style="margin: 0px; padding: 0px;" href="/">
-                <img src="img/logo.jfif" alt="Logo" height="70px">
-            </a>
-        </span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #4481bb!important;">
+        <a class="navbar-brand" style="padding: 0;" href="/"><img src="img/logo.jfif" alt="Logo"
+                height="70px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <div class="topnav-right">
-            <a class="active" href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/">Chat with Someone</a>
-            <span
-                style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
-                Connected users: <span id="users"> </span>
-            </span>
-        </div>
-    </div> -->
-
-    <nav class="navbar navbar-inverse" style="background-color: #4481bb;">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>                        
-            </button>
-            <a class="navbar-brand" href="/" style="margin: 0; padding: 0;">
-                <img src="img/logo.jfif" alt="Logo" height="50px">
-            </a>
-          </div>
-          <div class="collapse navbar-collapse" id="myNavbar">
-            <ul class="nav navbar-nav navbar-right">
-              <li><a style="color: #ffffff; font-size: 20px;" href="/"> Home</a></li>
-              <li><a style="color: #ffffff; font-size: 20px;" href="/about"> About</a></li>
-              <li><a style="color: #ffffff; font-size: 20px;" href="/"> Chat with Someone</a></li>
-              <li><a style="color: #ffffff; font-size: 20px;" href="#"> Connected Users: <span id="users"></span></a></li>
+        <div class="collapse navbar-collapse" style="background-color: #4481bb;" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Chat with Someone</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users"> </span></a>
+                </li> -->
             </ul>
-          </div>
+            <span class="navbar-text">
+                <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users"> </span></a>
+              </span>
         </div>
-      </nav>
+    </nav>
 
-    <div class="container">
+    <div class="container" style="margin-top: 10px;">
 
         <!-- <form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
             <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
@@ -122,17 +113,16 @@
             }
         </script>
 
-        <div style="padding-top: 30px;">
-            <button style="display: block; font-size: larger; color: white;" id="chat_btn" onclick="chat_btn()">
-                Chat with Someone
-            </button>
+        <div style="padding-top: 30px; margin-bottom: 25px;">
+            <button type="button" class="btn btn-primary" id="chat_btn"
+            onclick="chat_btn()">Chat with Someone</button>
         </div>
 
-        <div id="human_verif_form" style="display: none; margin-top: 30px; ">
+        <div id="human_verif_form" style="display: none; margin-top: 30px; margin-bottom: 65px;">
             <h3 style="width: 50%; margin-bottom:15px; ">
                 Please verify that you are a human.
             </h3>
-            <form method="post" style="margin: 0;" onsubmit="return submitUserForm();">
+            <form method="post" id="verif_form" style="margin: 0;" onsubmit="return submitUserForm();">
                 <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     data-callback="verifyCaptcha"></div>
                 <div id="g-recaptcha-error"></div>
@@ -141,17 +131,16 @@
         </div>
 
 
-        <div id="footer" style="bottom: 0; left: 0; margin-top: 245px; height: 45px; margin: auto; width: 100%; padding-top: 15px">
+    </div>
 
-            <p class="footer-links">
-                <a href="/" id="company">Chat123&copy;</a>
+    <div id="footer"
+        style="bottom: 0; left: 0;  margin-bottom: 0; height: 45px; width: 100%; padding-top: 15px">
 
-                <a href="/privacy" id="privacy">Privacy Policy</a>
-            </p>
+        <p class="footer-links">
+            <a href="/" id="company">Chat123&copy;</a>
 
-
-        </div>
-
+            <a href="/privacy" id="privacy">Privacy Policy</a>
+        </p>
     </div>
 
     <script>
@@ -167,6 +156,17 @@
             document.getElementById("users").innerHTML = total_users;
         });
     </script>
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 
 </body>
 

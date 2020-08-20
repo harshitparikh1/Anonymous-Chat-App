@@ -7,188 +7,235 @@
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <link rel="stylesheet" type="text/css" href="style/home.css">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
     <title>Privacy Policy</title>
 </head>
 
 <body>
 
-    <div class="topnav">
-        <span style="float: left;">
-            <a class="logo" style="margin: 0px; padding: 0px;" href="/">
-                <img src="img/logo.jfif" alt="Logo" height="70px">
-            </a>
-        </span>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #4481bb!important;">
+        <a class="navbar-brand" style="padding: 0;" href="/"><img src="img/logo.jfif" alt="Logo" height="70px"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-        <!-- <a href="/">chat123</a> -->
-
-        <div class="topnav-right">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/">Chat with Someone</a>
-            <span
-                style="padding: 15px; padding-top: 31px; font-size: 20px; display: inline-flex; align-items: center; color: white;">
-                Connected users: <span id="users"> </span>
+        <div class="collapse navbar-collapse" style="background-color: #4481bb;" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Home <span
+                            class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/about">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Chat with Someone</a>
+                </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users"> </span></a>
+                </li> -->
+            </ul>
+            <span class="navbar-text">
+                <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users">
+                    </span></a>
             </span>
-
         </div>
+    </nav>
+
+    <div class="container" style="margin-top: 10px;">
+        <h1>
+            Privacy Policy
+        </h1>
+        <small>
+            Last Updated: August 03, 2020.
+        </small>
+
+        <p>
+            <b> Because Your Privacy is Very Important to Us. </b>
+            Read our Privacy Policy & Terms of Use of Our Website
+        </p>
+
+        <p>
+            By using the Chat123 Web site, and/or related products and/or services ("Chat123 ", provided by Chat123),
+            you
+            agree to the following terms: <b> Do not use Chat123 if you are under 13. </b> Our Service does not address
+            anyone under
+            the age of 13 ("Children"). We do not knowingly collect personally identifiable information from children
+            under
+            13. If you are under 18, use it only with a parent/guardian's permission. Do not transmit nudity, sexually
+            harass anyone, publicize other peoples' private information, make statements that defame or libel anyone,
+            violate intellectual property rights, use automated programs to start chats, or behave in any other
+            inappropriate or illegal way on Chat123. Understand that human behavior is fundamentally uncontrollable,
+            that
+            the people you encounter on Chat123 may not behave appropriately, and that they are solely responsible for
+            their
+            own behavior. Use Chat123 at your own peril. Disconnect if anyone makes you feel uncomfortable. You may be
+            denied access to Chat123 for inappropriate behavior, or for any other reason. Chat123IS PROVIDED AS IS, AND
+            TO
+            THE MAXIMUM EXTENT ALLOWED BY APPLICABLE LAW, IT IS PROVIDED WITHOUT ANY WARRANTY, EXPRESS OR IMPLIED, NOT
+            EVEN
+            A WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. TO THE MAXIMUM EXTENT ALLOWED BY
+            APPLICABLE
+            LAW, THE PROVIDER OF CHAT123, AND ANY OTHER PERSON OR ENTITY ASSOCIATED WITH CHAT123'S OPERATION, SHALL NOT
+            BE
+            HELD LIABLE FOR ANY DIRECT OR INDIRECT DAMAGES ARISING FROM THE USE OF CHAT123, OR ANY OTHER DAMAGES RELATED
+            TO
+            CHAT123OF ANY KIND WHATSOEVER.
+        </p>
+
+        <p>
+            <b>
+                Information Collection and Use
+            </b>
+        </p>
+        <p>
+            While using our Service, we may ask you to provide us with certain personally identifiable information that
+            can
+            be used to contact or identify you.
+        </p>
+        <p>
+            <b>
+                Service Providers
+            </b>
+        </p>
+        <p>
+            We may employ third party companies and individuals to facilitate our Service, to provide the Service on our
+            behalf, to perform Service-related services or to assist us in analyzing how our Service is used.
+        </p>
+        <p>
+            These third parties have access to your Personal Information only to perform these tasks on our behalf and
+            are
+            obligated not to disclose or use it for any other purpose.
+        </p>
+        <p>
+            <b>
+                Security
+            </b>
+        </p>
+        <p>
+            The security of your Personal Information is important to us, but remember that no method of transmission
+            over
+            the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable
+            means to protect your Personal Information, we cannot guarantee its absolute security.
+        </p>
+        <p>
+            <b>
+                International Transfer
+            </b>
+        </p>
+        <p>
+            Your information, including Personal Information, may be transferred to — and maintained on — computers
+            located
+            outside of your state, province, country or other governmental jurisdiction where the data protection laws
+            may
+            differ than those from your jurisdiction.
+        </p>
+        <p>
+            If you are located outside India and choose to provide information to us, please note that we transfer the
+            information, including Personal Information, to India and process it there.
+        </p>
+        <p>
+            Your consent to this Privacy Policy followed by your submission of such information represents your
+            agreement to
+            that transfer.
+        </p>
+        <p>
+            <b>
+                Links To Other Sites
+            </b>
+        </p>
+        <p>
+            Our Service may contain links to other sites that are not operated by us. If you click on a third party
+            link,
+            you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of
+            every
+            site you visit.
+        </p>
+        <p>
+            We have no control over, and assume no responsibility for the content, privacy policies or practices of any
+            third party sites or services.
+        </p>
+        <p>
+            <b>
+                Children's Privacy
+            </b>
+        </p>
+        <p>
+            Our Service does not address anyone under the age of 13 ("Children").
+        </p>
+        <p>
+            We do not knowingly collect personally identifiable information from children under 13. If you are a parent
+            or
+            guardian and you are aware that your Children has provided us with Personal Information, please contact us.
+            If
+            we become aware that we have collected Personal Information from a children under age 13 without
+            verification of
+            parental consent, we take steps to remove that information from our servers.
+        </p>
+        <p>
+            <b>
+                Changes to the privacy policy
+            </b>
+        </p>
+        <p>
+            We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new
+            Privacy
+            Policy on this page.
+        </p>
+        <p>
+            You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy
+            are
+            effective when they are posted on this page.
+        </p>
+        <p>
+            <b>
+                Contact Us
+            </b>
+        </p>
+        <p style="margin-bottom: 70px;">
+            If you have any questions about this Privacy Policy, please <a href="">contact us</a> .
+        </p>
+
+        <div id="footer" style="bottom: 0; left: 0;  margin-bottom: 0; height: 45px; width: 100%; padding-top: 15px">
+
+            <p class="footer-links">
+                <a href="/" id="company">Chat123&copy;</a>
+
+                <a href="/privacy" id="privacy">Privacy Policy</a>
+            </p>
+        </div>
+
     </div>
 
-    <h1>
-        Privacy Policy
-    </h1>
-    <small>
-        Last Updated: August 03, 2020.
-    </small>
 
-    <p>
-        <b> Because Your Privacy is Very Important to Us. </b>
-        Read our Privacy Policy & Terms of Use of Our Website
-    </p>
+    <script>
+        var socket = io();
 
-    <p>
-        By using the Chat123 Web site, and/or related products and/or services ("Chat123 ", provided by Chat123), you
-        agree to the following terms: <b> Do not use Chat123 if you are under 13. </b> Our Service does not address
-        anyone under
-        the age of 13 ("Children"). We do not knowingly collect personally identifiable information from children under
-        13. If you are under 18, use it only with a parent/guardian's permission. Do not transmit nudity, sexually
-        harass anyone, publicize other peoples' private information, make statements that defame or libel anyone,
-        violate intellectual property rights, use automated programs to start chats, or behave in any other
-        inappropriate or illegal way on Chat123. Understand that human behavior is fundamentally uncontrollable, that
-        the people you encounter on Chat123 may not behave appropriately, and that they are solely responsible for their
-        own behavior. Use Chat123 at your own peril. Disconnect if anyone makes you feel uncomfortable. You may be
-        denied access to Chat123 for inappropriate behavior, or for any other reason. Chat123IS PROVIDED AS IS, AND TO
-        THE MAXIMUM EXTENT ALLOWED BY APPLICABLE LAW, IT IS PROVIDED WITHOUT ANY WARRANTY, EXPRESS OR IMPLIED, NOT EVEN
-        A WARRANTY OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE. TO THE MAXIMUM EXTENT ALLOWED BY APPLICABLE
-        LAW, THE PROVIDER OF CHAT123, AND ANY OTHER PERSON OR ENTITY ASSOCIATED WITH CHAT123'S OPERATION, SHALL NOT BE
-        HELD LIABLE FOR ANY DIRECT OR INDIRECT DAMAGES ARISING FROM THE USE OF CHAT123, OR ANY OTHER DAMAGES RELATED TO
-        CHAT123OF ANY KIND WHATSOEVER.
-    </p>
+        var total_users = 0;
 
-    <p>
-        <b>
-            Information Collection and Use
-        </b>
-    </p>
-    <p>
-        While using our Service, we may ask you to provide us with certain personally identifiable information that can
-        be used to contact or identify you.
-    </p>
-    <p>
-        <b>
-            Service Providers
-        </b>
-    </p>
-    <p>
-        We may employ third party companies and individuals to facilitate our Service, to provide the Service on our
-        behalf, to perform Service-related services or to assist us in analyzing how our Service is used.
-    </p>
-    <p>
-        These third parties have access to your Personal Information only to perform these tasks on our behalf and are
-        obligated not to disclose or use it for any other purpose.
-    </p>
-    <p>
-        <b>
-            Security
-        </b>
-    </p>
-    <p>
-        The security of your Personal Information is important to us, but remember that no method of transmission over
-        the Internet, or method of electronic storage is 100% secure. While we strive to use commercially acceptable
-        means to protect your Personal Information, we cannot guarantee its absolute security.
-    </p>
-    <p>
-        <b>
-            International Transfer
-        </b>
-    </p>
-    <p>
-        Your information, including Personal Information, may be transferred to — and maintained on — computers located
-        outside of your state, province, country or other governmental jurisdiction where the data protection laws may
-        differ than those from your jurisdiction.
-    </p>
-    <p>
-        If you are located outside India and choose to provide information to us, please note that we transfer the
-        information, including Personal Information, to India and process it there.
-    </p>
-    <p>
-        Your consent to this Privacy Policy followed by your submission of such information represents your agreement to
-        that transfer.
-    </p>
-    <p>
-        <b>
-            Links To Other Sites
-        </b>
-    </p>
-    <p>
-        Our Service may contain links to other sites that are not operated by us. If you click on a third party link,
-        you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every
-        site you visit.
-    </p>
-    <p>
-        We have no control over, and assume no responsibility for the content, privacy policies or practices of any
-        third party sites or services.
-    </p>
-    <p>
-        <b>
-            Children's Privacy
-        </b>
-    </p>
-    <p>
-        Our Service does not address anyone under the age of 13 ("Children").
-    </p>
-    <p>
-        We do not knowingly collect personally identifiable information from children under 13. If you are a parent or
-        guardian and you are aware that your Children has provided us with Personal Information, please contact us. If
-        we become aware that we have collected Personal Information from a children under age 13 without verification of
-        parental consent, we take steps to remove that information from our servers.
-    </p>
-    <p>
-        <b>
-            Changes to the privacy policy
-        </b>
-    </p>
-    <p>
-        We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy
-        Policy on this page.
-    </p>
-    <p>
-        You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are
-        effective when they are posted on this page.
-    </p>
-    <p>
-        <b>
-            Contact Us
-        </b>
-    </p>
-    <p style="margin-bottom: 70px;">
-        If you have any questions about this Privacy Policy, please <a href="">contact us</a> .
-    </p>
-
-
-<div id="footer">
-
-    <p class="footer-links">
-        <a href="/" id="company">Chat123&copy;</a>
-        <a href="/privacy" id = "privacy">Privacy Policy</a>
-    </p>
-
-
-</div>
-
-
-<script>
-    var socket = io();
-
-    var total_users = 0;
-
-    document.getElementById("users").innerHTML = total_users;
-
-    socket.on('users', function (users) {
-        total_users = users.users;
-        console.log("Total number of users are ", total_users);
         document.getElementById("users").innerHTML = total_users;
-    });
-</script>
+
+        socket.on('users', function (users) {
+            total_users = users.users;
+            console.log("Total number of users are ", total_users);
+            document.getElementById("users").innerHTML = total_users;
+        });
+    </script>
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 
 </body>
 

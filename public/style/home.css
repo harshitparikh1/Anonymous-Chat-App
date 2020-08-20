@@ -4,7 +4,7 @@ html{
 
 body {
     font-family: Helvetica;
-    background-color: rgb(212 231 247);
+    background-color: rgb(212 231 247)!important;
     min-height: 100vh;
 }
 
@@ -50,7 +50,7 @@ body {
     float: right;
   }
 
-form{
+#verif_form{
     margin: auto;
     width: 50%;
     /* padding: 10px; */
@@ -58,7 +58,7 @@ form{
 
 #chat_btn{
     transition-duration: 0.4s;
-    width: 15%;
+    width: 20%;
     /* margin: auto; */
     /* margin-left: 405px; */
     height: 50px;
@@ -78,39 +78,21 @@ form{
 /* } */
 
 
-/* footer{
-	position: fixed;
-    bottom: 0;
-    margin-left: -8px ;
-    clear: both;
-    position: relative;
-    height: 200px;
-    margin-top: -200px;
-} */
-
-
-
-
-
- body {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
   
   #footer {
     /* background-color: #efefef; */
     /* flex: 0 0 50px;or just height:50px; */
-    margin-top: auto;
+    /* margin-top: auto; */
     background-color: #4481bb;
+    position: fixed;
     /* width: 100%; */
     /* margin-left: -7px; */
     /* margin-bottom: 0px; */
-    /* margin-top: 10px; */
+    /* margin-top: 1000px; */
     /* padding: 7px; */
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    /* position: fixed; */
+    /* left: 0; */
+    /* bottom: 0; */
     width: 100%;
     /* background-color: red; */
     color: white;
@@ -134,7 +116,7 @@ form{
   }
 
   #chat_btn{
-    width: 70%;
+    width: 60%;
   }
   
  }
