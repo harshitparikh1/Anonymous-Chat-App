@@ -391,42 +391,42 @@ CHATTING BOX STYLE
 
   .other_buttons #send_photo button {
     border-width: 0 0 6px 0;
-    background-color: #3B7CB6;
+    /* background-color: #3B7CB6; */
     border-bottom: solid;
-    border-bottom-color: #3B7CB6;
+    /* border-bottom-color: #3B7CB6; */
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
-    color: white;
+    /* color: white; */
     font-family: Helvetica;
-    font-size: 1em;
-    width: 100px;
+    /* font-size: 1em; */
+    /* width: 100px; */
   }
 
   .other_buttons #request_photo button {
     border-width: 0 0 6px 0;
-    background-color: #3B7CB6;
+    /* background-color: #3B7CB6; */
     border-bottom: solid;
-    border-bottom-color: #3B7CB6;
+    /* border-bottom-color: #3B7CB6; */
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
-    color: white;
+    /* color: white; */
     font-family: Helvetica;
-    font-size: 1em;
-    width: 100px;
+    /* font-size: 1em; */
+    /* width: 100px; */
   }
 
   .other_buttons #end button {
     border-width: 0 0 6px 0;
-    background-color: #3B7CB6;
+    /* background-color: #3B7CB6; */
     border-bottom: solid;
-    border-bottom-color: #3B7CB6;
+    /* border-bottom-color: #3B7CB6; */
     border-radius: 20px;
     -moz-border-radius: 20px;
     -webkit-border-radius: 20px;
-    color: white;
+    /* color: white; */
     font-family: Helvetica;
-    font-size: 1em;
-    width: 100px;
+    /* font-size: 1em; */
+    /* width: 100px; */
   }

@@ -129,29 +129,23 @@
             <div>
                 <div class="other_buttons" id="other_buttons"
                     style="position: fixed; bottom: 105px; right: 2px; left: 492px;">
-                    <ul style="list-style:none;  border: 3px solid green;">
-                        <li>
-                            <span id="send_photo" style="display: none;">
-                                <button style="margin-top: 5px;">
-                                    <input type="file" id="image_btn" accept="image/*" style="display: none;">
-                                    <label for="image_btn"> Send Photo </label>
-                                </button>
-                            </span>
+                    <ul class="list-group list-group-horizontal-xl" style="list-style:none;">
+                        <li class="list-group-item" id="send_photo" style="display: none;">
+                            <button type="button" class="btn btn-success">
+                                <input type="file" id="image_btn" accept="image/*" style="display: none;">
+                                <label for="image_btn"> Send Photo </label>
+                            </button>
                         </li>
-                        <li>
-                            <span id="request_photo">
-                                <button class="request_photo_button" id="request_photo_button_id">
-                                    Request Photo
-                                </button>
-                            </span>
+                        <li class="list-group-item" id="request_photo">
+                            <button type="button" class="btn btn-primary">
+                                Request Photo
+                            </button>
                         </li>
-                        <li>
-                            <span id="end">
-                                <button>
-                                    <a style="text-decoration: none; color: white;" onclick="end_chat()"> End
-                                        Chat </a>
-                                </button>
-                            </span>
+                        <li class="list-group-item" id="end">
+                            <button type="button" class="btn btn-danger">
+                                <a style="text-decoration: none; color: white;" onclick="end_chat()"> End
+                                    Chat </a>
+                            </button>
                         </li>
                     </ul>
                 </div>
@@ -352,7 +346,7 @@
             socket.on('new request photo', function (data) {
                 if (('/#' + socket.id) == data.id) {
                     toastr.info("Sent Request");
-                    document.getElementById("request_photo_button_id").style.display = "none";
+                    document.getElementById("request_photo").style.display = "none";
                 } else {
                     toastr.info("Stranger is requesting for your photo.");
                     document.getElementById("send_photo").style.display = "block";
@@ -394,7 +388,7 @@
                         // setTimeout(function() { $("#connected").hide(); }, 5000);
                         document.getElementById("chat_box").style.display = "block";
                         document.getElementById("other_buttons").style.display = "none";
-                        document.getElementById("request_photo_button_id").style.display = "block";
+                        document.getElementById("request_photo").style.display = "block";
                         document.getElementById("send_photo").style.display = "none";
 
                         $("#alert_template button").after('<span>A stranger connected!</span>');
