@@ -14,7 +14,7 @@ GENERAL STYLE
 body {
     font-family: Helvetica;
     /* background-color: #E8B44D; */
-    background-color: #D8255C;
+    background-color: #D8255C!important;
     overflow-x: hidden;
 }
 
