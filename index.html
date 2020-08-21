@@ -127,9 +127,9 @@
                     onclick="myplusfunction()">+</button>
             </form>
             <div>
-                <div class="other_buttons" id="other_buttons"
-                    style="position: fixed; bottom: 105px; right: 2px; left: 492px;">
-                    <ul class="list-group list-group-horizontal-xl" style="list-style:none;">
+                <!-- <div class="other_buttons"> -->
+                    <!-- style="position: fixed; bottom: 105px; right: 2px; left: 492px;"> -->
+                    <ul class="list-group list-group-horizontal" id="other_buttons" style="list-style:none;">
                         <li class="list-group-item" id="send_photo" style="display: none;">
                             <button type="button" class="btn btn-success">
                                 <input type="file" id="image_btn" accept="image/*" style="display: none;">
@@ -148,7 +148,7 @@
                             </button>
                         </li>
                     </ul>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -352,6 +352,7 @@
                     document.getElementById("send_photo").style.display = "block";
                     document.getElementById("request_photo").style.marginTop = "10px";
                     document.getElementById("request_photo").style.marginBottom = "10px";
+                    document.getElementById("other_buttons").style.bottom = "40%";
 
                 }
             });
