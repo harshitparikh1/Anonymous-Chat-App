@@ -17,6 +17,7 @@ var io = require('socket.io')(http);
 const sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('Users.db');
 var req;
+var nodemailer = require('nodemailer');
 
 var users = 0;
 
@@ -54,6 +55,10 @@ app.get('/about', function (req, res) {
 
 app.get('/privacy', function (req, res) {
     res.sendFile(__dirname + '/privacy.html');
+});
+
+app.get('/contact', function (req, res) {
+    res.sendFile(__dirname + '/contact.html');
 });
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -233,6 +238,35 @@ io.on('connection', function (socket) {
             io.to(user).emit('user image', data.img);
         }
         // socket.broadcast.emit('user image', socket.nickname, data);
+    });
+
+    socket.on('contact_form', function(data){
+        var name = data.name;
+        var email = data.email;
+        var message = data.message;
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'noreply.healthenthusiast@gmail.com',
+                pass: 'health2020'
+            }
+        });
+
+        var mailOptions = {
+            from: 'noreply.healthenthusiast@gmail.com',
+            to: 'harshitparikh12@gmail.com',
+            subject: 'Contact Form',
+            text: `The name is ${name}. The email is ${email}. The message is ${message}.`
+        };
+
+        transporter.sendMail(mailOptions, function(error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log('Email sent: ' + info.response);
+            }
+        });
     });
 
     // socket.on('user image', function (msg) {
