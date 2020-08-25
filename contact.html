@@ -10,11 +10,12 @@
     <!-- <link href='custom.css' rel='stylesheet' type='text/css'> -->
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script src='https://www.google.com/recaptcha/api.js'></script>
-    <link rel="stylesheet" type="text/css" href="style/home.css">
+
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" type="text/css" href="style/home.css">
 </head>
 
 <body>
@@ -38,9 +39,9 @@
                 <li class="nav-item">
                     <a class="nav-link" style="color: white; font-size: x-large;" href="/">Chat with Someone</a>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users"> </span></a>
-                </li> -->
+                <li class="nav-item">
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/contact">Contact Us</a>
+                </li>
             </ul>
             <span class="navbar-text">
                 <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users">
@@ -57,18 +58,18 @@
 
                 <h1>Contact Form </h1>
 
-                <!-- <form method="POST" action=""> -->
+                <form method="POST" action="">
 
-                <div class="messages"></div>
+                    <div class="messages"></div>
 
-                <div class="controls">
+                    <!-- <div class="controls"> -->
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="form_name">Your Name *</label>
                                 <input id="form_name" type="text" name="name" class="form-control"
-                                    placeholder="Please enter your firstname *" required="required"
+                                    placeholder="Please enter your name *" required="required"
                                     data-error="Firstname is required.">
                                 <div class="help-block with-errors"></div>
                             </div>
@@ -109,19 +110,24 @@
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-1">
-                            <div class="form-group">
-                                <form method="post" id="verif_form" onsubmit="return submitUserForm();">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="form_message">Prove that you are not a robot *</label>
+                            <form method="post" id="verif_form" class="form-inline" role="form"
+                                onsubmit="return submitUserForm();">
+                                <div class="form-group">
                                     <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-                                        data-callback="verifyCaptcha"></div>
+                                        data-callback="verifyCaptcha" data-expired-callback="recaptchaExpired"></div>
                                     <div id="g-recaptcha-error"></div>
                                     <!-- <input type="submit" name="submit" value="Submit" /> -->
-                                </form>
-                            </div>
+                                </div>
+                                <div class="help-block with-errors"></div>
+                            </form>
                         </div>
-
-
+                    </div>
+                    <div class="row">
                         <div class="col-md-12">
                             <input type="submit" onclick="submit()" class="btn btn-success btn-send"
                                 value="Send message">
@@ -132,9 +138,7 @@
                             <p class="text-muted"><strong>*</strong> These fields are required.</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- </form> -->
+                </form>
 
             </div><!-- /.8 -->
 
@@ -192,6 +196,11 @@
             captcha += 1;
         }
 
+        function recaptchaExpired() {
+            alert("Your Recaptcha has expired, please verify it again !");
+            window.location.href = "/contact";
+        }
+
         function submit() {
             var name = document.getElementById("form_name").value;
             var email = document.getElementById("form_email").value;
@@ -215,15 +224,21 @@
                     email: email,
                     message: message
                 });
-
                 alert("Form is submitted.");
             }
         }
-
-
-
-
     </script>
+
+    <!-- JS, Popper.js, and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
 
 
 </body>
