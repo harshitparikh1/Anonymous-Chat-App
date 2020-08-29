@@ -221,6 +221,10 @@ CHATTING BOX STYLE
     width: 40%; 
     height: 600px;
     margin-top: 10px;
+    display: none; 
+    position: relative;
+    margin-bottom: 4.3%;
+    overflow-y: auto;
 }
 
 #chat_container #partner_status {
@@ -419,6 +423,9 @@ CHATTING BOX STYLE
     /* width: 100px; */
   }
 
+
+
+
   @media screen and (max-width: 600px) {
     #chat_container{
         width: 100%;
@@ -431,7 +438,7 @@ CHATTING BOX STYLE
     #chat_box{
         width: 100%; 
         height: 430px;
-        margin-bottom: 13%;
+        margin-bottom: 20%;
     }
     #other_buttons{
         position: fixed;
