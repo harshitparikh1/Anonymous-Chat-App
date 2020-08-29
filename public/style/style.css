@@ -431,6 +431,7 @@ CHATTING BOX STYLE
     #chat_box{
         width: 100%; 
         height: 430px;
+        margin-bottom: 13%;
     }
     #other_buttons{
         position: fixed;
