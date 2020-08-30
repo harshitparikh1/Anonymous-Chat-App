@@ -8,16 +8,9 @@
     <script type="text/javascript" src="js/jquery.min.js"></script>
     <script type="text/javascript" src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/client.js"></script>
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
-    <!-- <script type="text/javascript" src="js/script.js"></script> -->
     <!-- CSS only -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-    <!-- JS, Popper.js, and jQuery -->
-    <!-- <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-        crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
         integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
         crossorigin="anonymous"></script>
@@ -122,7 +115,6 @@
                         </button>
                     </li>
                 </ul>
-                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -141,24 +133,9 @@
             document.getElementById("join_chat").click();
         }, 1);
 
-        function end_chat() {
-            let count = 0;
-            console.log("Count = ", count);
-            // Check browser support
-            if (typeof (Storage) !== "undefined") {
-                // Store
-                localStorage.setItem("count", count + 1);
-            }
-            window.location.href = "/";
-
-        }
     </script>
 
     <script>
-        /*********************************
-         *
-         * SOCKET IO ON THE CLIENT SIDE
-         */
 
         toastr.options = {
             "debug": false,
@@ -170,18 +147,12 @@
             "extendedTimeOut": 1000
         }
 
-        // $(function () {
-        //     window.onload = $('#join_chat').click();
-        // });
-
         function updateScroll() {
             var element = document.getElementById("chat_box");
             element.scrollTop = element.scrollHeight;
         }
 
         $(document).ready(function () {
-
-            // document.getElementById("join_chat").click();
 
             var socket = io();
             var isMatched = false;
@@ -213,8 +184,6 @@
                 };
             });
 
-            // Handle the submit event
-            // Submit the username
             $usernameForm.submit(function () {
                 if ($nickname.val() != '') {
                     socket.emit('new user', $nickname.val());
@@ -253,9 +222,9 @@
             });
 
             // Handle the typing status of user
-            $chatMessage.focus(function () {
-                socket.emit('typing status', 'typing');
-            });
+            // $chatMessage.focus(function () {
+            //     socket.emit('typing status', 'typing');
+            // });
 
             $(function () {
                 $('#image_btn').bind('change', function (e) {
@@ -264,7 +233,6 @@
                         var data = e.originalEvent.target.files[0];
                         var reader = new FileReader();
                         reader.onload = function (evt) {
-                            // image(evt.target.result);
                             var dataArray = {
                                 img: evt.target.result,
                                 nickname: $nickname,
@@ -278,11 +246,11 @@
             });
 
             // Get the typing status from the partner
-            socket.on('new typing status', function () {
-                if ($partnerName != null) {
-                    $partnerStatus.text($partnerName);
-                }
-            });
+            // socket.on('new typing status', function () {
+            //     if ($partnerName != null) {
+            //         $partnerStatus.text($partnerName);
+            //     }
+            // });
 
             socket.on('users', function (users) {
                 total_users = users.users;
@@ -359,8 +327,6 @@
                     } else if (data == 'matched') {
                         console.log('matched');
                         toastr.info("User Connected. Someone say Hi..");
-                        // $("#connected").show();
-                        // setTimeout(function() { $("#connected").hide(); }, 5000);
                         document.getElementById("chat_box").style.display = "block";
                         document.getElementById("other_buttons").style.display = "none";
                         document.getElementById("request_photo").style.display = "block";

@@ -25,11 +25,6 @@ db.run("CREATE TABLE if not exists Users (_id INTEGER PRIMARY KEY, users TEXT)")
 
 db.serialize(function () {
 
-    // var stmt = db.prepare("INSERT INTO Users (users) VALUES (?)");
-
-    // stmt.run(users);
-    // stmt.finalize();
-
     db.each("SELECT * FROM Users", function (err, row) {
         console.log("Users : " + row._id, row.users);
     });
@@ -163,8 +158,6 @@ io.on('connection', function (socket) {
                     // There is no chatting pair
                     io.to(socket.partner.id).emit('matching status', 'waiting');
                 }
-                //emitToUsers(chatPairIds, socket.partner.id);
-                // Debug
                 debugMessageShowingWaitingList();
             }
         }
@@ -218,13 +211,13 @@ io.on('connection', function (socket) {
         }
     });
 
-    // Dealing with typing status
-    socket.on('typing status', function (data) {
-        // Tell his partner that he is typing
-        if (socket.partner) {
-            io.to(socket.partner.id).emit('new typing status', data);
-        }
-    });
+    // // Dealing with typing status
+    // socket.on('typing status', function (data) {
+    //     // Tell his partner that he is typing
+    //     if (socket.partner) {
+    //         io.to(socket.partner.id).emit('new typing status', data);
+    //     }
+    // });
 
     socket.on('user image', function (data) {
         var pair = data.pair;
@@ -265,11 +258,6 @@ io.on('connection', function (socket) {
             }
         });
     });
-
-    // socket.on('user image', function (msg) {
-    //     console.log(msg);
-    //     socket.broadcast.emit('user image', socket.nickname, msg);
-    // });
 
     function setUserPairs(s) {
         var index = 0,

@@ -20,8 +20,7 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color: #4481bb!important;">
-        <a class="navbar-brand" style="padding: 0;" href="/"><img src="img/logo.jfif" alt="Logo"
-                height="70px"></a>
+        <a class="navbar-brand" style="padding: 0;" href="/"><img src="img/logo.jfif" alt="Logo" height="70px"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -30,7 +29,8 @@
         <div class="collapse navbar-collapse" style="background-color: #4481bb;" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" style="color: white; font-size: x-large;" href="/">Home <span
+                            class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" style="color: white; font-size: x-large;" href="/about">About</a>
@@ -43,18 +43,13 @@
                 </li>
             </ul>
             <span class="navbar-text">
-                <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users"> </span></a>
-              </span>
+                <a class="nav-link" style="color: white; font-size: x-large;" href="">Connected Users: <span id="users">
+                    </span></a>
+            </span>
         </div>
     </nav>
 
     <div class="container" style="margin-top: 10px;">
-
-        <!-- <form action="https://www.google.com/recaptcha/api/siteverify" method="POST">
-            <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
-            <br />
-            <input type="submit" value="Submit">
-        </form> -->
 
         <h1>
             Welcome to our website where you can chat anonymously with strangers.
@@ -96,26 +91,16 @@
 
             function verifyCaptcha() {
                 document.getElementById('g-recaptcha-error').innerHTML = '';
-                // window.location.href = '/chat';
-                // document.getElementById('chat_btn').style.display = 'block';
                 window.location.href = '/chat';
             }
 
-            var count = localStorage.getItem("count");
-            console.log("count = ", count - 1);
-
             function chat_btn() {
-                if (parseInt(count) == 0) {
-                    window.location.href = '/chat';
-                } else {
-                    document.getElementById('human_verif_form').style.display = 'block';
-                }
+                document.getElementById('human_verif_form').style.display = 'block';
             }
         </script>
 
         <div style="padding-top: 30px; margin-bottom: 25px;">
-            <button type="button" class="btn btn-primary" id="chat_btn"
-            onclick="chat_btn()">Chat with Someone</button>
+            <button type="button" class="btn btn-primary" id="chat_btn" onclick="chat_btn()">Chat with Someone</button>
         </div>
 
         <div id="human_verif_form" style="display: none; margin-top: 30px; margin-bottom: 65px;">
@@ -126,15 +111,13 @@
                 <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
                     data-callback="verifyCaptcha"></div>
                 <div id="g-recaptcha-error"></div>
-                <!-- <input type="submit" name="submit" value="Submit" /> -->
             </form>
         </div>
 
 
     </div>
 
-    <div id="footer"
-        style="bottom: 0; left: 0;  margin-bottom: 0; height: 45px; width: 100%; padding-top: 15px">
+    <div id="footer" style="bottom: 0; left: 0;  margin-bottom: 0; height: 45px; width: 100%; padding-top: 15px">
 
         <p class="footer-links">
             <a href="/" id="company">Chat123&copy;</a>
