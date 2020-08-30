@@ -67,15 +67,7 @@
 
     <div id="username_container" style="width: 40%;">
         <div id="background">
-            <div>
-                <!-- <img id = "left_giraffe" src="img/giraffe_1.png"> -->
-            </div>
-            <div>
-                <!-- <img id = "right_giraffe" src="img/giraffe_2.png"> -->
-            </div>
-            <div>
-                <!-- <img id = "heart" src="img/heart.png"> -->
-            </div>
+
         </div>
         <div id="main_container">
             <div id="title">
@@ -272,7 +264,7 @@
                         var data = e.originalEvent.target.files[0];
                         var reader = new FileReader();
                         reader.onload = function (evt) {
-                            image('me', evt.target.result);
+                            // image(evt.target.result);
                             var dataArray = {
                                 img: evt.target.result,
                                 nickname: $nickname,
@@ -342,8 +334,8 @@
             socket.on('user image', image);
 
             function image(base64Image) {
-                $('#messages').append($('<p>').append($('<b>'), '<img height = "500" width = "500" src="' +
-                    base64Image + '"/>'));
+                $('#messages').append($('<p>'), '<img height = "500" width = "100%" src="' +
+                    base64Image + '"/>');
             }
 
             socket.on('chat pair', function (data) {
